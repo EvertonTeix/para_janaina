@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Música boa</title>
+    <style>
+        :root {
+            --primary: #4a5d4e; /* Verde botânico */
+            --accent: #d4a373;  /* Bege vintage */
+            --text: #2f3e33;
+            --bg: #fefae0;      /* Creme suave */
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            color: var(--text);
+            padding-bottom: 60px; /* Espaço para o rodapé */
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            padding: 30px;
+            border-radius: 2px;
+            border: 1px solid var(--primary);
+            box-shadow: 15px 15px 0px var(--primary);
+            width: 85%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin: 20px auto;
+        }
+
+        h2 {
+            font-family: 'Times New Roman', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            border: 1px solid var(--primary);
+            background: transparent;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            color: var(--primary);
+            transition: all 0.4s;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--bg);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border: 1px solid var(--primary);
+            background: #000;
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .music-quote {
+            font-style: italic;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .personal-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        /* Rodapé Fixo */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--primary);
+            color: var(--bg);
+            text-align: center;
+            padding: 15px 0;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 2px;
+            z-index: 100;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Flores */
+        .flower {
+            position: fixed;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(720deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'aba1')">Capítulo I</button>
+            <button class="tab-btn" onclick="openTab(event, 'aba2')">Capítulo II</button>
+        </div>
+
+        <div id="aba1" class="tab-content active">
+            <h2>Essa eu escuto pensando em você</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/423K3pipX3c" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <span class="music-quote">"Ô minha gata, morada dos meus sonhos, todo dia se eu pudesse eu ia estar com vc, eu já te via muito antes nos meus sonhos, eu procurei a vida inteira por alguém como você"</span>
+            <div class="personal-text">
+                Espero que escute esse trecho de música com a mesma energia que eu escuto... todos os dias quando escuto essa música pensando em você tenho certeza que cheguei nos meus dias de glória.
+            </div>
+        </div>
+
+        <div id="aba2" class="tab-content">
+            <h2>Essa eu quero viver com você</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/eG4mIKjrOq0" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <span class="music-quote">"Eu não conheço todas as flores, mas vou mandar todas que eu puder"</span>
+            <div class="personal-text">
+                Obviamente são flores virtuais mas saiba que são de coração, me encontra ou deixa eu te encontrar para que possamos ser felizes ao som da melhor banda já criada.
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        COM AMOR, TOINHO ❤️
+    </footer>
+
+    <script>
+        let flowerInterval = null;
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // Flores caem apenas na aba 2
+            if (tabName === 'aba2') {
+                if (!flowerInterval) {
+                    flowerInterval = setInterval(createSingleFlower, 300);
+                }
+            } else {
+                clearInterval(flowerInterval);
+                flowerInterval = null;
+            }
+        }
+
+        function createSingleFlower() {
+            const flowers = ['🥀', '🌿', '🌸', '🌼', '🍃', '🌻', '🌷', '🏵️'];
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.top = '-50px';
+            
+            const duration = Math.random() * 5 + 4;
+            flower.style.animationDuration = duration + 's';
+            flower.style.fontSize = Math.random() * 20 + 15 + 'px';
+            flower.style.opacity = Math.random() * 0.5 + 0.5;
+
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, duration * 1000);
+        }
+    </script>
+</body>
+</html>
